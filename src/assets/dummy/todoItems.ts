@@ -1,3 +1,5 @@
+// 다른 파일 import 일 경우는 {~~~} 경로
+// default는 이 친구만 내보낸다
 export default [
   {
     id: 0,
