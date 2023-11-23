@@ -2,14 +2,20 @@ import format from "date-fns/format";
 import { useState } from "react";
 import { FiCheck, FiChevronLeft, FiChevronRight, FiPlus } from "react-icons/fi";
 import todoItemsDummy from "./assets/dummy/todoItems";
+import { Spacing } from "./components/shared/Spacing";
+import { InputMode, TodoItem } from "./types";
 
 function App() {
   // ctrl + . , mac: cmd + .
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [todoItems, setTodoItems] = useState(todoItemsDummy);
+  const [todoItems, setTodoItems] = useState<TodoItem[]>(
+    todoItemsDummy as TodoItem[]
+  );
+
+  const [inputMode, setInputMode] = useState<InputMode>();
 
   // yyyy.MM.dd mm:ss
-  
+
   return (
     <div style={{ position: "relative", height: "100vh", overflow: "hidden" }}>
       <div
@@ -45,17 +51,57 @@ function App() {
           height: "100%",
           boxSizing: "border-box",
           overflowY: "auto",
+          display: "flex",
           flexDirection: "column",
-          gap: 20,
+          gap: 14,
         }}
       >
-        {[
-          ...todoItems,
-          ...todoItems,
-          ...todoItems,
-          ...todoItems,
-          ...todoItems,
-        ].map((item) => {
+        <div>
+          <input
+            style={{
+              background: "none",
+              border: "none",
+              borderBottom: "1px solid #666666",
+              outline: "none",
+              color: "#fff",
+              padding: "6px 0",
+              fontSize: "1em",
+              width: "100%",
+            }}
+            type="text"
+            placeholder="새로운 할일을 입력할 수 있어요 :)"
+            // value={1}
+            onChange={console.log}
+          />
+          <Spacing size={5} />
+          <div>
+            <button
+              style={{
+                background: "none",
+                border: "1px solid #CFFF48",
+                borderRadius: 14,
+                color: "#CFFF48",
+                padding: "5px 10px",
+                marginRight: 4,
+                fontWeight: 700,
+              }}
+            >
+              취소
+            </button>
+            <button
+              style={{
+                background: "#CFFF48",
+                padding: "5px 10px",
+                border: "1px solid transparent",
+                borderRadius: 14,
+                fontWeight: 700,
+              }}
+            >
+              저장
+            </button>
+          </div>
+        </div>
+        {todoItems.map((item) => {
           return (
             <div key={item.id}>
               {!item.isDone && (
@@ -106,8 +152,10 @@ function App() {
           height: 32,
           borderRadius: 30,
           background: "#CFFF48",
-          //text-align: 인라인 요소, text를 정렬하는 속성
-          //flex-center: icon같은 애들이 있을땐 얘가 좋다
+          // text-align vs flex center
+          // text-align: 인라인 요소, text를 정렬하는 속성
+          // <div style={{ textAlign: 'center' }}> <div>텍스트</div> </div>
+          // <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}> <div>텍스트</div> </div>
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
