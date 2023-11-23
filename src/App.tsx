@@ -9,7 +9,7 @@ function App() {
   const [todoItems, setTodoItems] = useState(todoItemsDummy);
 
   // yyyy.MM.dd mm:ss
-  // 뭐라도 돼라ㅇㅇasdas
+  
   return (
     <div style={{ position: "relative", height: "100vh", overflow: "hidden" }}>
       <div
@@ -45,6 +45,8 @@ function App() {
           height: "100%",
           boxSizing: "border-box",
           overflowY: "auto",
+          flexDirection: "column",
+          gap: 20,
         }}
       >
         {[
